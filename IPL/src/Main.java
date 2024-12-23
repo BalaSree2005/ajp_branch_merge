@@ -1,3 +1,6 @@
+import controller.PlayerController;
+import model.Player;
+import view.PlayerView;
 
 import java.util.Scanner;
 
@@ -8,35 +11,29 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Sample players for testing
-        controller.addPlayer(1, "Virat Kohli", "RCB", "Batsman", 600, 0);
-        controller.addPlayer(2, "Jasprit Bumrah", "MI", "Bowler", 50, 25);
-        controller.addPlayer(3, "MS Dhoni", "CSK", "Wicketkeeper", 300, 0);
-        controller.addPlayer(4, "Rashid Khan", "GT", "All-rounder", 250, 20);
-
-        System.out.println("=== IPL Player Management System ===");
-
         while (true) {
-            System.out.println("\nChoose an option:");
-            System.out.println("1. Add Player");
-            System.out.println("2. Update Player Stats");
-            System.out.println("3. Display All Players");
-            System.out.println("4. Display Players by Team");
-            System.out.println("5. Display Top Scorer");
-            System.out.println("6. Display Top Wicket Taker");
+            System.out.println("\n--- IPL Player Management System ---");
+            System.out.println("1. Add a new player");
+            System.out.println("2. Update player statistics");
+            System.out.println("3. Display all players");
+            System.out.println("4. Display players by team");
+            System.out.println("5. Display top scorer");
+            System.out.println("6. Display top wicket-taker");
             System.out.println("7. Exit");
-
+            System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
             switch (choice) {
                 case 1:
                     System.out.print("Enter Player ID: ");
                     int id = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    System.out.print("Enter Name: ");
+                    scanner.nextLine();
+                    System.out.print("Enter Player Name: ");
                     String name = scanner.nextLine();
-                    System.out.print("Enter Team: ");
+                    System.out.print("Enter Team Name: ");
                     String team = scanner.nextLine();
-                    System.out.print("Enter Role: ");
+                    System.out.print("Enter Role (Batsman/Bowler/All-rounder): ");
                     String role = scanner.nextLine();
                     System.out.print("Enter Runs: ");
                     int runs = scanner.nextInt();
@@ -46,13 +43,13 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.print("Enter Player ID to Update: ");
-                    id = scanner.nextInt();
-                    System.out.print("Enter New Runs: ");
-                    runs = scanner.nextInt();
-                    System.out.print("Enter New Wickets: ");
-                    wickets = scanner.nextInt();
-                    controller.updatePlayerStats(id, runs, wickets);
+                    System.out.print("Enter Player ID to update stats: ");
+                    int updateId = scanner.nextInt();
+                    System.out.print("Enter Runs: ");
+                    int updateRuns = scanner.nextInt();
+                    System.out.print("Enter Wickets: ");
+                    int updateWickets = scanner.nextInt();
+                    controller.updatePlayerStats(updateId, updateRuns, updateWickets);
                     break;
 
                 case 3:
@@ -61,9 +58,8 @@ public class Main {
 
                 case 4:
                     System.out.print("Enter Team Name: ");
-                    scanner.nextLine(); // Consume newline
-                    team = scanner.nextLine();
-                    controller.displayPlayersByTeam(team);
+                    String searchTeam = scanner.nextLine();
+                    controller.displayPlayersByTeam(searchTeam);
                     break;
 
                 case 5:
@@ -75,12 +71,12 @@ public class Main {
                     break;
 
                 case 7:
-                    System.out.println("Exiting the program...");
+                    System.out.println("Exiting the application. Goodbye!");
                     scanner.close();
-                    return;
+                    System.exit(0);
 
                 default:
-                    System.out.println("Invalid choice! Try again.");
+                    System.out.println("Invalid choice! Please try again.");
             }
         }
     }

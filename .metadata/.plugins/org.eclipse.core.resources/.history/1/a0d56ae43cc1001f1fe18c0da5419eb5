@@ -17,6 +17,7 @@ public class Player {
         this.runs = runs;
         this.wickets = wickets;
     }
+    
 
     // Getters and Setters
     public int getId() {
